@@ -4,6 +4,8 @@ This script is completely **Free**.
 So I seen a lot of requests in onyxLocksystem for fixed  and better version so I decided to create one!
 
 Of course I asked first for permission from HighHowdy (Creator of onyxLocksystem) to use the script idea and some of his code!
+![screenshot|690x148](upload://rYCF1UGN8hTLQlXGDJE1vYoAfDP.png)
+**So Big Credit to [HighHowdy](https://forum.cfx.re/u/highhowdy)**
 
 **Features**
 * Locking/Unlocking vehicles with keys
@@ -28,7 +30,8 @@ exports['xd_locksystem']:takePlayerKeys(plate)
 ```
 
 **Video**<br>
-[Click Here](https://streamable.com/hq1ykl) for Video!
+[Uploading: xd_locksystem.mp4...]()
+[Click Here](https://streamable.com/hq1ykl) if player isn't working!
 
 **Download**<br>
 [Click Here](https://github.com/LielXD/xd_locksystem) to Download!
