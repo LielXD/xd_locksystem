@@ -27,5 +27,8 @@ take player keys
 exports['xd_locksystem']:takePlayerKeys(plate)
 ```
 
-**Video**
-[Click Here](https://streamable.com/hq1ykl) if player isn't working!
+**Video**<br>
+[Click Here](https://streamable.com/hq1ykl) for Video!
+
+**Download**<br>
+[Click Here](https://github.com/LielXD/xd_locksystem) to Download!
