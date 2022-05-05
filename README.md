@@ -28,4 +28,4 @@ exports['xd_locksystem']:takePlayerKeys(plate)
 ```
 
 **Video**
-https://streamable.com/hq1ykl
+[Click Here](https://streamable.com/hq1ykl) if player isn't working!
