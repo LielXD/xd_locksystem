@@ -3,7 +3,7 @@ This script is completely **Free**.
 
 So I seen a lot of requests in onyxLocksystem for fixed  and better version so I decided to create one!
 
-Of course I asked first for permission from HighHowdy (Creator of onyxLocksystem) to use the script idea and some of his code!
+Of course I asked first for permission from HighHowdy (Creator of onyxLocksystem) to use the script idea and some of his code!<br>
 **So Big Credit to [HighHowdy](https://forum.cfx.re/u/highhowdy)**
 
 **Features**
