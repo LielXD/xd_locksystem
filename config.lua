@@ -2,7 +2,7 @@
 
 Config = {}
 
-Config.checkKeyInterval = 6000				-- Interval to check Keys when player in car | current 6s
+Config.checkKeyInterval = 5000				-- Interval to check Keys when player in car | current 6s
 
 Config.BlackList = {						-- Vehicles Script will not work on them
 	-- Bikes
