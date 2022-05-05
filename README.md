@@ -17,11 +17,12 @@ Of course I asked first for permission from HighHowdy (Creator of onyxLocksystem
 * Any Notify System - make sure to change to your notify in client if you have custom notify
 * same as above for progress bars
 
-**Giving player keys**
+**Exports**
+give player keys
 ```
 exports['xd_locksystem']:givePlayerKeys(plate)
 ```
-**Taking player keys**
+take player keys
 ```
 exports['xd_locksystem']:takePlayerKeys(plate)
 ```
