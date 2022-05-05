@@ -26,3 +26,6 @@ take player keys
 ```
 exports['xd_locksystem']:takePlayerKeys(plate)
 ```
+
+**Video**
+https://streamable.com/hq1ykl
