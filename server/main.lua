@@ -81,12 +81,12 @@ ESX.RegisterUsableItem('lockpick', function(source)
 	local shouldBreak = false
 	
 	if vehicle == 0 then
-		TriggerClientEvent('xd_notify:send', source, 'אתה חייב להיות ברכב בכדי להתשמש בזה', 3000, 'bottom', true, 'error')
+		TriggerClientEvent('xd_notify:send', source, 'You have to be in vehicle to use this', 3000, 'bottom', true, 'error')
 		return
 	end
 	
 	if GetPedInVehicleSeat(vehicle, -1) ~= ped then
-		TriggerClientEvent('xd_notify:send', source, 'אתה חייב להיות הנהג בכדי לעשות פעולה זאת', 3000, 'bottom', true, 'error')
+		TriggerClientEvent('xd_notify:send', source, 'You have to be the driver to hotwire the vehicle', 3000, 'bottom', true, 'error')
 		return
 	end
 	
