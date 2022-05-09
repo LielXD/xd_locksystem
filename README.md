@@ -1,12 +1,9 @@
 **Welcome Everybody for my first Release!**<br>
 This script is completely **Free**.
 
-![XD_Locksystem|690x388, 50%](upload://lnm8AVNItga4cDx2PIE9ANH1yCf.png)
-
 So I've seen a lot of requests in onyxLocksystem for fixed  and better version so I decided to create one!
 
 Of course I asked first for permission from HighHowdy (Creator of onyxLocksystem) to use the script idea and some of his code!<br>
-![screenshot|690x148](upload://rYCF1UGN8hTLQlXGDJE1vYoAfDP.png)
 <br>**So Big Credit to @HighHowdy**
 *********************************************************************
 **Features**
