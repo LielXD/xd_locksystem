@@ -2,7 +2,7 @@
 
 Config = {}
 
-Config.checkKeyInterval = 5000				-- Interval to check Keys when player in car | current 6s
+Config.checkKeyInterval = 5000				-- Interval to check Keys when player in car | current 5s
 
 Config.BlackList = {						-- Vehicles Script will not work on them
 	-- Bikes
@@ -22,6 +22,12 @@ Config.noKeys = {
 	HotwireAlarm = true,					-- Police alert | Current true, if true change the alarm in code to whatever script you have!
 	HotwireAlarmChance = 3,					-- The chance to alert the police, only if above is true | Currently 1 to 3
 	HotwireWait = 6000,						-- Amount of time to wait every progressbar | Currently 6s
+	Hotwire_Stages = {						-- Add here as much stages as you want for the Hotwire | Current 4 stages
+		'Preparing Hotwire',
+		'Cutting Cables',
+		'Hotwire Attempt',
+		'Trying turning on Engine'
+	},
 	
 	-- Search
 	SearchKey = 47,							-- Search key | Currently G
@@ -50,3 +56,45 @@ Config.key = {
 }
 -- You can find all controls Here ↓
 -- https://docs.fivem.net/docs/game-references/controls/
+
+Config.ESX_ProgressBar = true				-- If you want to use ESX progressbars | current true
+Config.Custom_ProgressBar = function(Text, Time)
+	
+	--[[
+		if ESX_ProgressBar is set to false then add here your custom progressbar
+		for example
+		exports['xd_progress']:drawBar(Time, Text)
+	]]--
+	
+end
+
+Config.ESX_Notify = true					-- If you want to use ESX notify | current true
+Config.Custom_Notify = function(Text, Time, Type)
+
+	--[[
+		if ESX_Notify is set to false then add here your custom notify
+		for example
+		TriggerEvent('xd_notify:send', Text, Time, 'bottom', true, Type)
+	]]--
+	
+end
+
+Config.Translate = {
+	['search'] = 'Searching Vehicle',
+	['rob_key'] = 'taking the keys',
+	['no_vehicles'] = 'No vehicle nearby',
+	['give_yourself'] = 'You can\'t give yourself keys',
+	['no_players'] = 'No players found',
+	['give_key'] = 'You gave your keys of plate %s',
+	['no_key'] = 'You don\'t have keys',
+	['found_key'] = 'Found keys for plate %s',
+	['notfound_key'] = 'Failed to found keys',
+	['npc_run'] = 'the driver decided to runaway',
+	['npc_key'] = 'you took the keys for plate %s',
+	['give_key_target'] = 'You got vehicle keys for plate %s',
+	['lockpick'] = 'The lockpick broke!',
+	['hotwire_success'] = 'Hotwire succeed',
+	['hotwire_failed'] = 'Hotwire failed',
+	['locked'] = 'Vehicle Locked',
+	['unlocked'] = 'Vehicle Unlocked'
+}
