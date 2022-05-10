@@ -46,26 +46,46 @@ RegisterCommand('givekey', function(source, args)
 	end
 	
 	if vehicle == 0 then
-		TriggerEvent('xd_notify:send', 'No vehicle nearby', 3000, 'bottom', true, 'error')
+		if Config.ESX_Notify then
+			exports['esx_notify']:Notify('error', 3000, Config.Translate['no_vehicles'])
+		else
+			Config.Custom_Notify(Config.Translate['no_vehicles'], 3000, 'error')
+		end
 		return
 	end
 
 	ESX.TriggerServerCallback('xd_locksystem:getKeys', function(keys)
 		if keys then
 			if tonumber(args[1]) and GetPlayerPed(target) == GetPlayerPed(-1) then
-				TriggerEvent('xd_notify:send', 'You can\'t give yourself keys', 3000, 'bottom', true, 'error')
+				if Config.ESX_Notify then
+					exports['esx_notify']:Notify('error', 3000, Config.Translate['give_yourself'])
+				else
+					Config.Custom_Notify(Config.Translate['give_yourself'], 3000, 'error')
+				end
 				return
 			elseif target == -1 then
-				TriggerEvent('xd_notify:send', 'No players found', 3000, 'bottom', true, 'error')
+				if Config.ESX_Notify then
+					exports['esx_notify']:Notify('error', 3000, Config.Translate['no_players'])
+				else
+					Config.Custom_Notify(Config.Translate['no_players'], 3000, 'error')
+				end
 				return
 			end
 			if distance < Config.key.PlayerRadius then
 				takePlayerKeys(plate)
 				TriggerServerEvent('xd_locksystem:giveKeyCommand', GetPlayerServerId(target), plate)
-				TriggerEvent('xd_notify:send', 'You gave your keys of plate\n~h~' .. plate, 5000, 'bottom', true, 'warning')
+				if Config.ESX_Notify then
+					exports['esx_notify']:Notify('info', 5000, Config.Translate['give_key']:format(plate))
+				else
+					Config.Custom_Notify(Config.Translate['give_key']:format(plate), 5000, 'info')
+				end
 			end
 		else
-			TriggerEvent('xd_notify:send', 'You don\'t have keys', 3000, 'bottom', true, 'error')
+			if Config.ESX_Notify then
+				exports['esx_notify']:Notify('error', 3000, Config.Translate['no_key'])
+			else
+				Config.Custom_Notify(Config.Translate['no_key'], 3000, 'error')
+			end
 		end
 	end, plate)
 end)
@@ -107,17 +127,31 @@ Citizen.CreateThread(function()
 						
 						if chance == 1 then
 							isSearch = true
-							exports['xd_progress']:drawBar(6000, 'Searching Vehicle')
-							Wait(6300)
-							TriggerEvent('xd_notify:send', 'Found keys\nfor plate ~h~' .. plate, 3000, 'bottom', true, 'info')
+							if Config.ESX_ProgressBar then
+								exports['esx_progressbar']:Progressbar(Config.Translate['search'], 6000,{FreezePlayer = false, animation = false})
+							else
+								Config.Custom_ProgressBar(Config.Translate['search'], 6000)
+							end
+							if Config.ESX_Notify then
+								exports['esx_notify']:Notify('success', 5000, Config.Translate['found_key']:format(plate))
+							else
+								Config.Custom_Notify(Config.Translate['found_key']:format(plate), 5000, 'success')
+							end
 							TriggerServerEvent('xd_locksystem:setVehicleSearched', plate)
 							TriggerServerEvent('xd_locksystem:givePlayerKey', plate)
 							isSearch = false
 						else
 							isSearch = true
-							exports['xd_progress']:drawBar(6000, 'Searching Vehicle')
-							Wait(6300)
-							TriggerEvent('xd_notify:send', 'Failed to found keys', 3000, 'bottom', true, 'error')
+							if Config.ESX_ProgressBar then
+								exports['esx_progressbar']:Progressbar(Config.Translate['search'], 6000,{FreezePlayer = false, animation = false})
+							else
+								Config.Custom_ProgressBar(Config.Translate['search'], 6000)
+							end
+							if Config.ESX_Notify then
+								exports['esx_notify']:Notify('error', 3000, Config.Translate['notfound_key'])
+							else
+								Config.Custom_Notify(Config.Translate['notfound_key'], 3000, 'error')
+							end
 							TriggerServerEvent('xd_locksystem:setVehicleSearched', plate)
 							isSearch = false
 						end
@@ -139,7 +173,9 @@ Citizen.CreateThread(function()
 		
 		if isHotwire or isSearch then
 			DisableAllControlActions(0)
-			EnableControlAction('INPUTGROUP_LOOK', true)
+			-- Enable looking
+			EnableControlAction(0, 1, true)
+			EnableControlAction(0, 2, true)
 		end
 	end
 end)
@@ -204,14 +240,25 @@ Citizen.CreateThread(function()
                     local chance = math.random(1, Config.rob.RunawayChance)
                     if chance == 1 then
                         Wait(400)
-						TriggerEvent('xd_notify:send', 'the driver decided to runaway', 3000, 'bottom', true, 'warning')
+						if Config.ESX_Notify then
+							exports['esx_notify']:Notify('error', 3000, Config.Translate['npc_run'])
+						else
+							Config.Custom_Notify(Config.Translate['npc_run'], 3000, 'error')
+						end
                     else
                         local plate = GetVehicleNumberPlateText(prevCar)
-						exports['xd_progress']:drawBar(3600, 'taking the keys')
-                        Wait(3600)
+						if Config.ESX_ProgressBar then
+							exports['esx_progressbar']:Progressbar(Config.Translate['rob_key'], 3600,{FreezePlayer = false, animation = false})
+						else
+							Config.Custom_ProgressBar(Config.Translate['rob_key'], 3600)
+						end
                         givePlayerKeys(plate)
 						TriggerServerEvent('xd_locksystem:check', plate)
-						TriggerEvent('xd_notify:send', 'you took the keys for plate ~h~' .. plate, 3000, 'bottom', true, 'info')
+						if Config.ESX_Notify then
+							exports['esx_notify']:Notify('success', 5000, Config.Translate['npc_key']:format(plate))
+						else
+							Config.Custom_Notify(Config.Translate['npc_key']:format(plate), 5000, 'success')
+						end
                     end
                     SetBlockingOfNonTemporaryEvents(prevPed, false)
 					StopAnimTask(prevPed, 'random@mugging3', 'handsup_standing_base', 1.0)
@@ -265,7 +312,11 @@ end)
 RegisterNetEvent('xd_locksystem:giveKeyCommand')
 AddEventHandler('xd_locksystem:giveKeyCommand', function(plate)
 	givePlayerKeys(plate)
-	TriggerEvent('xd_notify:send', 'You got vehicle keys for plate\n~h~' .. plate, 5000, 'bottom', true, 'info')
+	if Config.ESX_Notify then
+		exports['esx_notify']:Notify('success', 5000, Config.Translate['give_key_target']:format(plate))
+	else
+		Config.Custom_Notify(Config.Translate['give_key_target']:format(plate), 5000, 'success')
+	end
 end)
 
 --[[
@@ -305,17 +356,19 @@ function hotwire(lockpick)
 		TaskPlayAnim(PlayerPedId(), 'veh@std@ds@base', 'hotwire', 1.0, 1.0, -1, 1, 0.3, true, true, true)
 	end)
 
-	local text = {
-		'Preparing Hotwire',
-		'Cutting Cables',
-		'Hotwire Attempt',
-		'Trying turning on Engine'
-	}
-	for i=1, #text, 1 do
-		exports['xd_progress']:drawBar(Config.noKeys.HotwireWait, text[i])
-		Wait(Config.noKeys.HotwireWait + 500)
+	for i=1, #Config.noKeys.Hotwire_Stages, 1 do
+		if Config.ESX_ProgressBar then
+			exports['esx_progressbar']:Progressbar(Config.noKeys.Hotwire_Stages[i], Config.noKeys.HotwireWait,{FreezePlayer = false, animation = false})
+		else
+			Config.Custom_ProgressBar(Config.noKeys.Hotwire_Stages[i], Config.noKeys.HotwireWait)
+		end
+		Wait(100)
 		if i == 2 and lockpick == 'break' then
-			TriggerEvent('xd_notify:send', 'The lockpick broke!', 3000, 'bottom', true, 'error')
+			if Config.ESX_Notify then
+				exports['esx_notify']:Notify('error', 3000, Config.Translate['lockpick'])
+			else
+				Config.Custom_Notify(Config.Translate['lockpick'], 3000, 'error')
+			end
 			StopAnimTask(ped, 'veh@std@ds@base', 'hotwire', 1.0)
 			isHotwire = false
 			return
@@ -331,7 +384,11 @@ function hotwire(lockpick)
 		givePlayerKeys(plate)
 		StopAnimTask(ped, 'veh@std@ds@base', 'hotwire', 1.0)
 		TriggerServerEvent('xd_locksystem:check', plate)
-		TriggerEvent('xd_notify:send', 'Hotwire succeed', 3000, 'bottom', true, 'success')
+		if Config.ESX_Notify then
+			exports['esx_notify']:Notify('success', 5000, Config.Translate['hotwire_success'])
+		else
+			Config.Custom_Notify(Config.Translate['hotwire_success'], 5000, 'success')
+		end
 		Wait(100)
 		SetVehicleLights(vehicle, 0)
 		SetVehicleEngineOn(vehicle, true, true, false)
@@ -339,7 +396,11 @@ function hotwire(lockpick)
 		isHotwire = false
 		StopAnimTask(ped, 'veh@std@ds@base', 'hotwire', 1.0)
 		TriggerServerEvent('xd_locksystem:check', plate)
-		TriggerEvent('xd_notify:send', 'Hotwire failed', 3000, 'bottom', true, 'error')
+		if Config.ESX_Notify then
+			exports['esx_notify']:Notify('error', 3000, Config.Translate['hotwire_failed'])
+		else
+			Config.Custom_Notify(Config.Translate['hotwire_failed'], 3000, 'error')
+		end
 	end
 end
 
@@ -366,17 +427,29 @@ function toggleLock(vehicle)
 			if lockStatus == 1 then
 				SetVehicleDoorsLocked(vehicle, 4)
 				SetVehicleDoorsLockedForAllPlayers(vehicle, true)
-				TriggerEvent('xd_notify:send', 'Vehicle Locked', 3000, 'bottom', true, 'info')
+				if Config.ESX_Notify then
+					exports['esx_notify']:Notify('info', 3000, Config.Translate['locked'])
+				else
+					Config.Custom_Notify(Config.Translate['locked'], 3000, 'info')
+				end
 				playLockAnim()
 			elseif lockStatus == 4 then
 				SetVehicleDoorsLocked(vehicle, 1)
 				SetVehicleDoorsLockedForAllPlayers(vehicle, false)
-				TriggerEvent('xd_notify:send', 'Vehicle Unlocked', 3000, 'bottom', true, 'info')
+				if Config.ESX_Notify then
+					exports['esx_notify']:Notify('info', 3000, Config.Translate['unlocked'])
+				else
+					Config.Custom_Notify(Config.Translate['unlocked'], 3000, 'info')
+				end
 				playLockAnim()
 			else
 				SetVehicleDoorsLocked(vehicle, 4)
 				SetVehicleDoorsLockedForAllPlayers(vehicle, true)
-				TriggerEvent('xd_notify:send', 'Vehicle Locked', 3000, 'bottom', true, 'info')
+				if Config.ESX_Notify then
+					exports['esx_notify']:Notify('info', 3000, Config.Translate['locked'])
+				else
+					Config.Custom_Notify(Config.Translate['locked'], 3000, 'info')
+				end
 				playLockAnim()
 			end
 			if not IsPedInAnyVehicle(GetPlayerPed(-1), true) then
