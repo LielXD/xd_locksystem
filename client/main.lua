@@ -334,10 +334,12 @@ end)
 
 function givePlayerKeys(plate)
 	TriggerServerEvent('xd_locksystem:givePlayerKey', plate)
+	TriggerServerEvent('xd_locksystem:check', plate)
 end
 
 function takePlayerKeys(plate)
 	TriggerServerEvent('xd_locksystem:takePlayerKey', plate)
+	TriggerServerEvent('xd_locksystem:check', plate)
 end
 
 function hotwire(lockpick)
