@@ -96,5 +96,7 @@ Config.Translate = {
 	['hotwire_success'] = 'Hotwire succeed',
 	['hotwire_failed'] = 'Hotwire failed',
 	['locked'] = 'Vehicle Locked',
-	['unlocked'] = 'Vehicle Unlocked'
+	['unlocked'] = 'Vehicle Unlocked',
+	['not_in_vehicle'] = 'You have to be in vehicle to use this',
+	['not_driver'] = 'You have to be the driver to hotwire the vehicle'
 }
