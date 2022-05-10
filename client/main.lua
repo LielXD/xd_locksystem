@@ -319,6 +319,15 @@ AddEventHandler('xd_locksystem:giveKeyCommand', function(plate)
 	end
 end)
 
+RegisterNetEvent('xd_locksystem:sendNotify')
+AddEventHandler('xd_locksystem:sendNotify', function(text, time, type)
+	if Config.ESX_Notify then
+		exports['esx_notify']:Notify(type, time, text)
+	else
+		Config.Custom_Notify(text, time, type)
+	end
+end)
+
 --[[
 	Functions
 ]]--
