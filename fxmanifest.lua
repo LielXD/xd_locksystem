@@ -23,9 +23,7 @@ server_scripts {
 }
 
 dependencies {
-	'es_extended',
-	'xd_notify',
-	'xd_progress'
+	'es_extended'
 }
 
 exports {
