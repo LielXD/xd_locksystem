@@ -55,7 +55,7 @@ recommended to open issue in github :slight_smile:
 **Download**<br>
 [Click Here](https://github.com/LielXD/xd_locksystem) to Download!
 *********************************************************************
-***XD_LOCKSYSTEM v1.1.0***
+***XD_LOCKSYSTEM v1.1.0***<br>
 **Fixed**
 * Player camera only moved left or right without bottom and up when hotwire/search
 * Fixed exports when taking or giving vehicle keys it takes few sec to update now its updating automatically
