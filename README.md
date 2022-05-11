@@ -59,7 +59,7 @@ recommended to open issue in github :slight_smile:
 **Fixed**
 * Player camera only moved left or right without bottom and up when hotwire/search
 * Fixed exports when taking or giving vehicle keys it takes few sec to update now its updating automatically
-* 
+
 **Added**
 * New Settings for Config file
 * Support for esx_notify
