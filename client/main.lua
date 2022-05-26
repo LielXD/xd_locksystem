@@ -103,6 +103,7 @@ Citizen.CreateThread(function()
 		local vehicle = GetVehiclePedIsIn(ped, false)
 		local driver = GetPedInVehicleSeat(vehicle, -1)
 		local plate = GetVehicleNumberPlateText(vehicle)
+		local engine = GetIsVehicleEngineRunning(vehicle)
 		local disable = false
 		
 		if IsPedInAnyVehicle(ped, false) and driver == ped then
@@ -111,7 +112,7 @@ Citizen.CreateThread(function()
 					disable = true
 				end
 			end
-			if not hasKeys and disable == false then
+			if not hasKeys and disable == false and not engine then
 				SetVehicleNeedsToBeHotwired(vehicle, false)
 				
 				if not isHotwire and not isSearch then
