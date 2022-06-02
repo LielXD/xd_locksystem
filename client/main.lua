@@ -115,8 +115,6 @@ Citizen.CreateThread(function()
 				end
 			end
 			if not hasKeys and disable == false and not engine then
-				SetVehicleNeedsToBeHotwired(vehicle, false)
-				
 				if not isHotwire and not isSearch then
 					SetVehicleEngineOn(vehicle, false, true, true)
 					if hasSearched then
