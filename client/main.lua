@@ -107,6 +107,8 @@ Citizen.CreateThread(function()
 		local disable = false
 		
 		if IsPedInAnyVehicle(ped, false) and driver == ped then
+			SetVehicleNeedsToBeHotwired(vehicle, false)
+			SetPedConfigFlag(ped, 429, true)
 			for k, v in pairs(Config.BlackList) do
 				if GetHashKey(v) == GetEntityModel(vehicle) then
 					disable = true
