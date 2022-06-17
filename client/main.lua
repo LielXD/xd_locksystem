@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
 		local engine = GetIsVehicleEngineRunning(vehicle)
 		local disable = false
 		
-		if IsPedInAnyVehicle(ped, false) and driver == ped then
+		if IsPedInAnyVehicle(ped, false) and driver == ped and not hasKeys and disable == false and not engine then
 			SetVehicleNeedsToBeHotwired(vehicle, false)
 			SetPedConfigFlag(ped, 429, true)
 			for k, v in pairs(Config.BlackList) do
@@ -114,54 +114,53 @@ Citizen.CreateThread(function()
 					disable = true
 				end
 			end
-			if not hasKeys and disable == false and not engine then
-				if not isHotwire and not isSearch then
-					SetVehicleEngineOn(vehicle, false, true, true)
-					if hasSearched then
-						DrawText3D(GetEntityCoords(vehicle), Config.noKeys.TextSearched)
-					else
-						DrawText3D(GetEntityCoords(vehicle), Config.noKeys.Text)
-					end
+			SetVehicleEngineOn(vehicle, false, true, true)
+			
+			if not isHotwire and not isSearch then
+				if hasSearched then
+					DrawText3D(GetEntityCoords(vehicle), Config.noKeys.TextSearched)
+				else
+					DrawText3D(GetEntityCoords(vehicle), Config.noKeys.Text)
+				end
+				
+				if IsControlJustPressed(1, Config.noKeys.SearchKey) and not hasSearched then
+					local chance = math.random(1, Config.noKeys.FoundKeyChance)
 					
-					if IsControlJustPressed(1, Config.noKeys.SearchKey) and not hasSearched then
-						local chance = math.random(1, Config.noKeys.FoundKeyChance)
-						
-						if chance == 1 then
-							isSearch = true
-							if Config.ESX_ProgressBar then
-								exports['esx_progressbar']:Progressbar(Config.Translate['search'], 6000,{FreezePlayer = false, animation = false})
-							else
-								Config.Custom_ProgressBar(Config.Translate['search'], 6000)
-							end
-							if Config.ESX_Notify then
-								exports['esx_notify']:Notify('success', 5000, Config.Translate['found_key']:format(plate))
-							else
-								Config.Custom_Notify(Config.Translate['found_key']:format(plate), 5000, 'success')
-							end
-							TriggerServerEvent('xd_locksystem:setVehicleSearched', plate)
-							TriggerServerEvent('xd_locksystem:givePlayerKey', plate)
-							isSearch = false
+					if chance == 1 then
+						isSearch = true
+						if Config.ESX_ProgressBar then
+							exports['esx_progressbar']:Progressbar(Config.Translate['search'], 6000,{FreezePlayer = false, animation = false})
 						else
-							isSearch = true
-							if Config.ESX_ProgressBar then
-								exports['esx_progressbar']:Progressbar(Config.Translate['search'], 6000,{FreezePlayer = false, animation = false})
-							else
-								Config.Custom_ProgressBar(Config.Translate['search'], 6000)
-							end
-							if Config.ESX_Notify then
-								exports['esx_notify']:Notify('error', 3000, Config.Translate['notfound_key'])
-							else
-								Config.Custom_Notify(Config.Translate['notfound_key'], 3000, 'error')
-							end
-							TriggerServerEvent('xd_locksystem:setVehicleSearched', plate)
-							isSearch = false
+							Config.Custom_ProgressBar(Config.Translate['search'], 6000)
 						end
-						TriggerServerEvent('xd_locksystem:check', plate)
+						if Config.ESX_Notify then
+							exports['esx_notify']:Notify('success', 5000, Config.Translate['found_key']:format(plate))
+						else
+							Config.Custom_Notify(Config.Translate['found_key']:format(plate), 5000, 'success')
+						end
+						TriggerServerEvent('xd_locksystem:setVehicleSearched', plate)
+						TriggerServerEvent('xd_locksystem:givePlayerKey', plate)
+						isSearch = false
+					else
+						isSearch = true
+						if Config.ESX_ProgressBar then
+							exports['esx_progressbar']:Progressbar(Config.Translate['search'], 6000,{FreezePlayer = false, animation = false})
+						else
+							Config.Custom_ProgressBar(Config.Translate['search'], 6000)
+						end
+						if Config.ESX_Notify then
+							exports['esx_notify']:Notify('error', 3000, Config.Translate['notfound_key'])
+						else
+							Config.Custom_Notify(Config.Translate['notfound_key'], 3000, 'error')
+						end
+						TriggerServerEvent('xd_locksystem:setVehicleSearched', plate)
+						isSearch = false
 					end
-					
-					if IsControlJustPressed(1, Config.noKeys.HotwireKey) then
-						hotwire(false)
-					end
+					TriggerServerEvent('xd_locksystem:check', plate)
+				end
+				
+				if IsControlJustPressed(1, Config.noKeys.HotwireKey) then
+					hotwire(false)
 				end
 			end
 		end
