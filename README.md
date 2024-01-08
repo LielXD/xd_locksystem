@@ -19,27 +19,39 @@ This resource will upgrade your roleplay server with more features for players t
 **Developers**<br>
 
 **Exports**<br>
+
 To set owned vehicle keys you can use the exports below.
-* **plate** - the vehicle license plate.
-* **remove** - if true then it will remove the key from any player.
+
 ```lua
 exports['xd_locksystem']:SetVehicleKey(plate, remove)
 ```
+* **plate** - the vehicle license plate.
 
-* **plate** - the vehicle plate you want to check key for.
+* **remove** - if true then it will remove the key from any player.
+
 ```lua
 exports['xd_locksystem']:GetVehicleData(plate)
 ```
-this will return 2 values:
+* **plate** - the vehicle plate you want to check key for.
+<br>
+
+  *this will return 2 values:*
+
 * **keys** - with these values
-1. false - no one have keys to the vehicle.
-2. true - someone have keys to the vehicle.
-3. 'self' - current player have keys to vehicle.
+
+  * false - no one have keys to the vehicle.
+
+  * true - someone have keys to the vehicle.
+
+  * 'self' - current player have keys to vehicle.
 
 * **lockpick** - with these values
-1. false - vehicle have not lockpicked.
-2. true - vehicle lockpicked.
-3. 'NPC' - used in the script to prevent from players to lockpick npc vehicles driving around.
+
+  * false - vehicle have not lockpicked.
+
+  * true - vehicle lockpicked.
+
+  * 'NPC' - used in the script to prevent from players to lockpick npc vehicles driving around.
 
 **Example**
 client script:
