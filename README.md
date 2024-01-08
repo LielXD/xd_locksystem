@@ -53,7 +53,7 @@ exports['xd_locksystem']:GetVehicleData(plate)
 
   * 'NPC' - used in the script to prevent from players to lockpick npc vehicles driving around.
 
-**Example**
+**Example**<br>
 client script:
 ```lua
 RegisterCommand('engine', function()
