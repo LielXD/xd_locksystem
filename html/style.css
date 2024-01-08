@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: 'Heebo', sans-serif;
+}
+
+body {
+    opacity: 0;
+}
+
+:root {
+    /* Lockpick */
+    --container-color: #818286;
+    --container-before-color: #F7941D;
+
+    --playarea-color: radial-gradient(#5c5c5c, #00000066);
+    --playarea-background-color: #865222;
+    --playarea-border-color: #3A3A3C;
+
+    --pin-background-color: linear-gradient(90deg, #5C5C5E, #6B6C70, #5C5C5E);
+    --pin-color: linear-gradient(90deg, #E56C25, #FBAF41, #E56C25);
+
+    --lockpick-bar-color: #B7B8BC;
+    --lockpick-bag-color: #8B5F3C;
+    --lockpick-bag-color-dark: #76471B;
+}
+
+section {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    transition: .2s;
+    opacity: 0;
+}
+
+.timer {
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 5vh;
+    font-family: sans-serif;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 10px black;
+    animation: scale 1s forwards;
+    scale: 0;
+    text-align: right;
+    direction: rtl;
+}
+
+.timer h1 {
+    font-weight: inherit;
+}
+
+@keyframes scale {
+    0% {scale: 0;}
+    50% {scale: 1;}
+    100% {scale: 0;}
+}
+
+.container {
+    position: relative;
+    display: grid;
+    width: 460px;
+    height: 670px;
+    left: 25%;
+    bottom: 0;
+    border-radius: 1vh;
+    cursor: none;
+    background: var(--container-color);
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 330px;
+    top: 62%;
+    right: 100%;
+    translate: 0 -50%;
+    background: var(--container-before-color);
+}
+
+.playarea {
+    position: absolute;
+    top: 230px;
+    width: 100%;
+    height: 350px;
+    background: var(--playarea-color);
+}
+
+.playarea::before,
+.playarea::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 12px;
+    top: 100%;
+    background: var(--playarea-border-color);
+}
+
+.playarea::before {
+    top: unset;
+    bottom: 100%;
+}
+
+.playarea ul {
+    --box-height: 200px;
+    list-style: none;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    isolation: isolate;
+}
+
+.playarea ul::before,
+.playarea ul::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 185px;
+    z-index: -1;
+    background: var(--playarea-background-color);
+}
+
+.playarea ul::after {
+    bottom: 0;
+    height: 80px;
+}
+
+.playarea ul li {
+    /* 100 - 180 */
+    --pin-height: 180px;
+    --pin-top: 0px;
+    --pin-transition: 0s;
+
+    --pin-game-color: transparent;
+
+    position: relative;
+    width: 50px;
+    height: 375px;
+    bottom: calc(375px - 200px);
+    background: var(--pin-background-color);
+    border-radius: 0 0 2vh 2vh / 0 0 .5vh .5vh;
+}
+
+.playarea ul li span {
+    position: absolute;
+    width: 100%;
+    height: var(--pin-height);
+    top: calc(100% - var(--pin-height) - var(--pin-top));
+    left: 0;
+    background: var(--pin-color);
+    transition: var(--pin-transition);
+    box-shadow: 0 0 1vh var(--pin-game-color), 0 0 1vh var(--pin-game-color) inset;
+    border-radius: inherit;
+}
+
+.playarea ul li span::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: calc(100% + 12px);
+    background: var(--pin-color);
+    box-shadow: 0 0 1vh var(--pin-game-color), 0 0 1vh var(--pin-game-color) inset;
+}
+
+#stick {
+    position: absolute;
+    top: 65%;
+    left: 31.5%;
+    width: 700px;
+    height: 100px;
+    isolation: isolate;
+    cursor: none;
+}
+#stick .lockpick {
+    position: absolute;
+    top: 50%;
+    left: 66%;
+    translate: -50% -50%;
+    width: 470px;
+    height: 40px;
+    border-bottom-right-radius: 50vh;
+    background: var(--lockpick-bar-color);
+    z-index: -1;
+}
+#stick .lockpick:last-child {
+    width: 30px;
+    height: 50px;
+    top: 5px;
+    left: unset;
+    right: 2px;
+    translate: unset;
+    border-radius: 0;
+    border-top-right-radius: 3vh;
+    rotate: 45deg;
+    z-index: -1;
+}
+#stick .case {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 90%;
+    border-top-left-radius: 3vh;
+    border-bottom-left-radius: 3vh;
+    top: 50%;
+    left: 0;
+    translate: 0 -50%;
+    isolation: isolate;
+    z-index: 1;
+}
+#stick .case::before,
+#stick .case::after {
+    content: '';
+    position: absolute;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    background: var(--lockpick-bag-color-dark);
+}
+#stick .case::before {
+    height: 90%;
+    background: var(--lockpick-bag-color);
+    z-index: 1;
+}
+#stick .case .dot {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    translate: -50% -50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    z-index: 1;
+    background: var(--lockpick-bar-color);
+}
