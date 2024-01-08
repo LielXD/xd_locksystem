@@ -6,7 +6,6 @@ description 'Vehicle lock system Script for Fivem'
 
 version '2.0.0'
 shared_scripts {
-    '@xd_core/import.lua',
     'config.lua'
 }
 
@@ -16,10 +15,6 @@ client_scripts {
 
 server_scripts {
     'server/*.lua'
-}
-
-dependencies {
-    'xd_core'
 }
 
 files {
