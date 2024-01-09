@@ -71,6 +71,16 @@ RegisterCommand('engine', function()
 end)
 ```
 *********************************************************************
+
+**Give key to other player**
+
+You can use the command:
+```lua
+/givekey [player_id]
+```
+**if there is no id specified then closest player will get the key.**
+
+*********************************************************************
 **Help!**
 Please! if you need any help or found any bugs please open an issue at the resource github repository.
 *********************************************************************
