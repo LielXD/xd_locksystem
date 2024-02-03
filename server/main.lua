@@ -31,7 +31,7 @@ function SetVehicleKey(plate, playerId)
     end
 
     local identifier = false
-    if not Config.Framework then
+    if not Config.Framework or Config.Framework == true then
         identifier = GetPlayerIdentifier(playerId, 0)
     elseif string.lower(Config.Framework) == 'xd' then
         local player = XD.getPlayer(playerId)
@@ -50,7 +50,7 @@ function GetVehicleData(plate, playerId)
     if not plate or not tonumber(playerId) then return end
 
     local identifier = false
-    if not Config.Framework then
+    if not Config.Framework or Config.Framework == true then
         identifier = GetPlayerIdentifier(playerId, 0)
     elseif string.lower(Config.Framework) == 'xd' then
         local player = XD.getPlayer(playerId)
